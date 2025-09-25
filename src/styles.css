@@ -5,6 +5,11 @@
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   background: #f8fafc;
@@ -12,18 +17,18 @@ body {
   line-height: 1.6;
 }
 
+#root {
+  height: 100vh;
+  width: 100vw;
+}
+
 /* Main container */
 .app-container { 
   display: flex; 
   height: 100vh; 
-  max-width: 1400px;
-  margin: 0 auto;
+  width: 100vw;
   background: #ffffff;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.08);
-  border-radius: 12px;
   overflow: hidden;
-  margin: 8px;
-  height: calc(100vh - 16px);
 }
 
 /* Sidebar */
@@ -735,9 +740,8 @@ body {
 /* Responsive Design */
 @media (max-width: 1024px) {
   .app-container {
-    margin: 4px;
-    height: calc(100vh - 8px);
-    border-radius: 8px;
+    height: 100vh;
+    width: 100vw;
   }
   
   .sidebar {
@@ -753,9 +757,8 @@ body {
 @media (max-width: 768px) {
   .app-container {
     flex-direction: column;
-    margin: 0;
     height: 100vh;
-    border-radius: 0;
+    width: 100vw;
   }
   
   .sidebar {
