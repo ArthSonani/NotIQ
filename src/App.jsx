@@ -34,6 +34,7 @@ export default function App() {
           onPin={pinNote}
         />
       </aside>
+      
       <main className="editor-panel">
         {selectedNote ? (
           <TextEditor

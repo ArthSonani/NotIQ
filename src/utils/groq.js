@@ -8,7 +8,7 @@ const groq = new Groq({
 export async function askGroq(prompt) {
   try {
     const response = await groq.chat.completions.create({
-      model: "llama-3.3-70b-versatile", // Correct Groq model name
+      model: "llama-3.3-70b-versatile", 
       messages: [{ role: "user", content: prompt }],
       temperature: 0.3,
       max_tokens: 1000,
