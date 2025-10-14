@@ -15,6 +15,8 @@ export default function App() {
     pinNote,
     searchNotes,
     loading,
+    asc,
+    toggleAsc,
   } = useNotes();
 
   return (
@@ -26,6 +28,11 @@ export default function App() {
           className="search-input"
           onChange={e => searchNotes(e.target.value)}
         />
+        <div className="sort-controls">
+          <button className="sort-toggle-btn" onClick={toggleAsc}>
+            Sort: {asc ? "A → Z" : "Z → A"}
+          </button>
+        </div>
         <NoteList
           notes={notes}
           selectedNote={selectedNote}

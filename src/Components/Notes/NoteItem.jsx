@@ -42,13 +42,16 @@ export default function NoteItem({ note, selected, onSelect, onDelete, onPin }) 
             >
               {note.pinned ? "📌" : "📍"}
             </button>
-            <button 
+
+
+            {note.tempUnlocked || !note.encrypted && <button 
               className="action-btn delete-btn"
               onClick={e => {e.stopPropagation(); onDelete();}}
               title="Delete note"
             >
               🗑️
             </button>
+            }
           </div>
         </div>
         <div className="note-preview">

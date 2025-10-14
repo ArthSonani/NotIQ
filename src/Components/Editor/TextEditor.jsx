@@ -5,6 +5,7 @@ import { highlightGlossaryInHTML } from "../../utils/glossaryUtils";
 import { markGrammarErrorsInHTML } from "../../utils/grammarUtils";
 import EncryptModal from "../Encryption/EncryptModal";
 import DecryptModal from "../Encryption/DecryptModal";
+import ChangePasswordModal from "../Encryption/ChangePasswordModal";
 import { encryptNote, decryptNote } from "../../utils/encryption";
 
 export default function TextEditor({ note, onSave }) {
@@ -14,6 +15,7 @@ export default function TextEditor({ note, onSave }) {
   const [isLocked, setIsLocked] = useState(note.encrypted || false);
   const [showEncrypt, setShowEncrypt] = useState(false);
   const [showDecrypt, setShowDecrypt] = useState(false);
+  const [showChangePassword, setShowChangePassword] = useState(false);
   
   // AI-related state
   const [glossary, setGlossary] = useState([]);
@@ -505,6 +507,12 @@ export default function TextEditor({ note, onSave }) {
         className="title-input"
         value={title}
         onChange={e => {
+
+          if(e.target.value.length > 10) {
+            alert("Title cannot exceed 10 characters.");
+            return;
+          }
+
           setTitle(e.target.value);
           
           // Get current content from editor to preserve it when updating title
@@ -636,6 +644,9 @@ export default function TextEditor({ note, onSave }) {
             <button className="encryption-btn lock-btn" onClick={handleLock}>
               🔒 Lock Note
             </button>
+            <button className="encryption-btn change-password-btn" onClick={() => setShowChangePassword(true)} style={{ marginLeft: '8px' }}>
+              🔁 Change Password
+            </button>
           </>
         ) : !note.encrypted ? (
           <button className="encryption-btn" onClick={() => setShowEncrypt(true)}>
@@ -646,6 +657,35 @@ export default function TextEditor({ note, onSave }) {
 
       {/* Encrypt/Decrypt Modals */}
       {showEncrypt && <EncryptModal onEncrypt={handleEncrypt} onCancel={() => setShowEncrypt(false)} />}
+      {showChangePassword && (
+        <ChangePasswordModal
+          onChangePassword={async (oldPwd, newPwd) => {
+            try {
+              // Try to decrypt with old password
+              const decrypted = decryptNote(note.content, oldPwd);
+              // If decryption succeeded, re-encrypt with new password
+              const reEncrypted = encryptNote(decrypted, newPwd);
+
+              onSave({
+                ...note,
+                content: reEncrypted,
+                encrypted: true,
+                tempUnlocked: false,
+                tempDecryptedContent: undefined
+              });
+
+              setShowChangePassword(false);
+              setIsLocked(true);
+              if (editorRef.current) editorRef.current.innerHTML = "";
+              alert('Password changed successfully. The note is now locked.');
+            } catch (err) {
+              console.error('Change password failed:', err);
+              alert('Old password is incorrect. Please try again.');
+            }
+          }}
+          onCancel={() => setShowChangePassword(false)}
+        />
+      )}
     </div>
   );
 }
