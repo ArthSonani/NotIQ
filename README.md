@@ -1,28 +1,18 @@
 # NotIQ  
-*AI‑Powered Note Taking App*
+NotIQ is a web‑application designed to streamline and enhance your note‑taking process by leveraging AI. With a clean interface and smart features, you can create, organize and retrieve notes more intelligently. It’s ideal for students, professionals, or anyone who takes frequent notes and wishes to make them smarter.
 
-[Live Demo](https://not-iq.vercel.app/)  (Click the link to try it out.)
+[Live Demo](https://not-iq.vercel.app/) 
 
 
 https://github.com/user-attachments/assets/d7e80ef1-ca88-41a2-83f4-c7a4d5f807c3
 
-## About  
-NotIQ is a web‑application designed to streamline and enhance your note‑taking process by leveraging AI. With a clean interface and smart features, you can create, organize and retrieve notes more intelligently. It’s ideal for students, professionals, or anyone who takes frequent notes and wishes to make them smarter.
-
 ---
 
 ## Features  
-- Create and edit notes with text (and possibly rich text / markdown support)  
-- Smart categorization or tagging of notes using AI (future/implemented)  
+- Create and edit notes with text
+- Smart categorization or tagging of notes using AI 
 - Clean, responsive UI for desktop and mobile  
 - Fast frontend built with modern tooling  
-
----
-
-## Tech Stack  
-- **Frontend**: React.js with Vite (fast build & hot‑reload)  
-- **AI integration**:  
-- **Deployment**: Vercel 
 
 ---
 ### Installation  
